@@ -32,7 +32,7 @@ The second is that the argument you built the brief on does not rest on the bad 
 
 One student in this cohort has this same misreading — diminishing returns as a cut to harvest rather than a rise in labor — sitting in a specification he is about to build from, and it is the single most consequential error available in this case. Catching it now costs you ten minutes.
 
-### Stage 1.2 is due 11 september
+### Stage 1.2 is the next deliverable
 
 capabilities/marginal-analysis/spec.md is still a stub. The specification is the deliverable that carries the most weight in that stage — the workbook is built from it, and the rule is that when a check fails you correct the specification and regenerate rather than patching the sheet.
 
