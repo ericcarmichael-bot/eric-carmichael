@@ -41,6 +41,7 @@ The purpose of this model is to determine the optimal ratio of planted crops for
 | 'Labor_Hours_for_q_beds_of_one_crop | Labor(q) = q x hours per week per bed x 36 x (1+dimishing return rate)^q | formula for case | Case scenerio |
 
 ## Structure
+ - Create an excel workbook
  - Create a crop table on the top of the sheet that lists all of the known values above. The table must be formatted in an easy-to-read way.
  - Every cell in the file outside of the known values must contain a formula and not a constant.
  - Create a separate sheet that lists all of the constraints known to this case from the information outlined in the inputs above.
