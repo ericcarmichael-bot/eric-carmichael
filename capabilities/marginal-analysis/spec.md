@@ -3,7 +3,7 @@ type: spec
 capability: marginal-analysis
 engagement: perfect-competition
 date: 2026-09-08
-status: built            # draft | built | audited
+status: audited          # draft | built | audited
 built_with: "Claude Code, from this file"
 ---
 
@@ -75,3 +75,59 @@ For example, with tomatoes, the input logic would read: Labor_Hours(q) = q x 'To
 ## Audit findings
 Added AFTER the build. For each check: what you checked, what you found, what
 you did about it.
+
+- **Named ranges.** Checked every input in the named contract exists as a workbook-level named
+  range pointing at the `Inputs` sheet. Found all 22 present and correctly resolved, including
+  the two named ranges that preserve exact spec spelling/typos (`Tomato_Fertizer`,
+  `Carrrot_Hours`) — kept as-is rather than "corrected," since the spec calls these out as the
+  literal named contract. Also named the three decision cells (`Tomato_Beds`, `Carrot_Beds`,
+  `Mesclun_Beds`) and five key computed cells (`Total_Beds`, `Total_Labor_Hours`,
+  `Total_Labor_Cost`, `Blended_Labor_Rate`, `Total_Farm_Profit`) for auditability and for
+  Solver's constraint/objective references. 31 named ranges total.
+
+- **"Every cell a formula" rule.** Checked every cell outside the named inputs. Found it holds
+  everywhere except the three beds-per-crop cells (`Output!B5:B7`), which are plain values by
+  design — they're Solver's changeable cells, and Excel Solver requires its variable cells to
+  hold values, not formulas. Documented this on the Output sheet itself (labeled "Decision
+  Variables — Solver-Adjustable Cells").
+
+- **`Labor_Hours_for_q_beds_of_one_crop` input row.** This row in the spec's contract is a
+  formula pattern (`Labor(q) = q × hrs/bed/wk × Season × (1+dim)^q`), not a single value, so it
+  can't be one named range — q differs per crop and per row of the marginal-analysis table.
+  Implemented it directly, per crop, wherever labor hours are calculated (Output P&L and the
+  Marginal Analysis bed-by-bed tables), referencing the named crop inputs each time.
+
+- **Fixed_Costs / blended labor rate allocation.** The 756ab47 spec update confirms labor is
+  costed to each crop at the farm-wide blended rate (Total Labor $ ÷ Total Labor Hours), with the
+  farmer/temp split applied at the farm level, not per crop. The spec doesn't say whether
+  `Fixed_Costs` should also be split across crops — assumed **no**: Fixed_Costs is subtracted
+  once at the farm level only, and "Profit per crop" (Output!G11:G13) is a contribution margin
+  (Revenue − Fertilizer − blended-rate Labor Cost). This ties out exactly: `Total_Farm_Profit` =
+  Σ(contribution margins) − `Fixed_Costs`, with no arbitrary allocation key needed. Flagging this
+  assumption for review — if crop-level P&L should absorb a fixed-cost allocation instead, that's
+  a one-line formula change in Output!G11:G13.
+
+- **Recalculation / formula errors.** Ran LibreOffice recalculation (868 formulas). Found 0
+  errors. (Environment note: this sandbox's LibreOffice install was missing the `libreoffice-calc`
+  component entirely, which made every load attempt fail or hang regardless of file content —
+  installed it via `apt-get install libreoffice-calc` before recalculating; unrelated to the model
+  itself.)
+
+- **Independent cross-check of the optimum.** Brute-forced the full integer bed-count search
+  space (21 × 21 × 31 ≈ 13,671 combinations) in a standalone Python script, applying the same
+  formulas as the workbook. Found the optimum at Tomatoes=10, Carrots=20, Mesclun=30 beds,
+  Total Farm Profit = $42,775.16 — matching the workbook's `Total_Farm_Profit` cell exactly.
+  Used this to pre-populate the three Solver-changeable cells so the workbook opens already at
+  the answer (Solver is still fully wired up on the Output sheet to re-run or audit it).
+
+- **Constraints sheet.** Checked all 8 constraint rows (3 bed caps, total beds ≤ 64, total labor
+  hours ≤ 6,480, 3 non-negative-integer checks) against the pre-solved mix. Found all "OK" —
+  Total beds = 60 (bed cap not binding), Total labor hours ≈ 5,276.8 (labor cap not binding).
+
+- **Cross-over mechanism.** Checked that each crop's bed-by-bed marginal-profit table in
+  `Marginal Analysis` is internally consistent with the chosen mix. Found: Tomatoes' cross-over
+  (marginal profit flips from +$688 at bed 9 to −$453 at bed 10) lands on exactly the same bed
+  count Solver selected — tomatoes are limited by diminishing returns, not by bed cap or the farm
+  labor pool. Carrots and Mesclun are still marginally profitable at their respective bed caps
+  (20 and 30) when Solver stops there — they're limited by `Bed_Cap`, not by diminishing returns.
+  No changes needed; this is the expected mechanism the spec asked the output area to show.
