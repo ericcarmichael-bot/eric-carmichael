@@ -58,6 +58,7 @@ For example, with tomatoes, the input logic would read: Labor_Hours(q) = q x 'To
 ## Conventions
  - Beds must be whole numbers; no partial beds planted
  - The farmer's hours 'Farmer_Hours' must be consumed first before hiring additional temp labor
+ - The P&L allocates labor at the blended rate. Total labor dollars/total hours. The permanent vs temporary split is farm level and not per crop
  - Diminishing returns compound on the labor hours and not on the price
  - Fertilizer costs are linear with no compounding effects or diminishing returns
  - One planting per season with no mid-season course corrections available
