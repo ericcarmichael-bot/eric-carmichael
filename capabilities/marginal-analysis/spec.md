@@ -29,7 +29,7 @@ The purpose of this model is to determine the optimal ratio of planted crops for
 | 'Mesclun_Price' | 2700 | USD per bed | Case scenario, crop table |
 | 'Mesclun_Hours' | 1.25 | hours per week per bed | Case scenario, crop table |
 | 'Mesclun_Fertilizer' | 880 | USD per bed | Case scenario, crop table |
-| 'Mesclun_Dim_Return' | 0.0125 | percent of compounding diminishing returns per bed |
+| 'Mesclun_Dim_Return' | 0.0125 | percent of compounding diminishing returns per bed | Case scenerio, crop table |
 | 'Season' | 36 | number of weeks | Case scenario, farm table |
 | 'Fixed_Costs' | 20000 | USD per season | Case scenario, farm table |
 | 'Beds_Available' | 64 | Total beds available to plant this season | Case scenario, farm table |
