@@ -134,20 +134,39 @@ you did about it.
   Used this to pre-populate the three Solver-changeable cells so the workbook opens already at
   the answer (Solver is still fully wired up on the Output sheet to re-run or audit it).
 
-- **Cross-over mechanism.** Checked that each crop's bed-by-bed marginal-profit table in
-  `Marginal Analysis` is internally consistent with the chosen mix. Found an error: the table
-  priced every incremental bed's labor hours at the farm-wide blended rate ($19.73/hr), which
-  produced a tomato crossover between bed 9 (+$688.37) and bed 10 (−$453.46) — directly
-  contradicting the sheet's own cumulative-profit column (which peaks at bed 9, not bed 10) and
-  the "Solver-selected" label sitting on bed 10. The blended rate is the correct convention for
-  P&L cost *allocation* (see Conventions), but it is an average cost, not a marginal one — and at
-  the optimal mix the farmer's 720 hours are already fully committed elsewhere, so the true cost
-  of one more hour is the temp-worker rate ($17.36/hr). Re-priced at the marginal rate: bed 10
-  marginal profit = +$551.41 (MC $8,248.59), bed 11 marginal profit = −$590.72 (MC $9,390.72) —
-  the crossover now lands correctly at bed 10, agreeing with both Solver's answer and the
-  brute-force total-profit search. Corrected the `Marginal Analysis` sheet's labor-cost formula
-  to price incremental hours at the marginal wage (temp rate, once cumulative farm-wide hours
-  exceed `Farmer_Hours`) rather than the blended average. Carrots and mesclun use the same
-  formula and were re-checked under the correction — both remain marginally profitable at their
-  bed caps (the lower marginal rate only raises their marginal profit further), so their
-  conclusion is unchanged.
+- **Constraints sheet.** Checked all 8 constraint rows (3 bed caps, total beds ≤ 64, total labor
+  hours ≤ 6,480, 3 non-negative-integer checks) against the pre-solved mix. Found all "OK" —
+  Total beds = 60 (bed cap not binding), Total labor hours ≈ 5,276.8 (labor cap not binding).
+
+- **Cross-over mechanism — basis for "farm-wide" in the marginal-rate convention.** The
+  Conventions section says marginal hours are priced at the temp rate "once cumulative farm-wide
+  labor hours have already passed `Farmer_Hours`," but doesn't say whose hours count first when
+  building one crop's table. Confirmed with the engagement owner: farm-wide means holding the
+  *other two* crops at their Solver-selected bed counts and summing their total labor hours, then
+  adding this crop's own cumulative hours through bed q — not each crop's own isolated 720-hour
+  allowance, and not a sheet-order priority. At the solved mix, any two of the three crops alone
+  already exceed 720 hours (Carrots+Mesclun ≈ 2,942 hrs; Tomatoes+Mesclun ≈ 4,294 hrs;
+  Tomatoes+Carrots ≈ 3,317 hrs), so every bed in every crop's table is priced at the marginal
+  (temp) rate throughout — implemented as a live tiered formula (`Farmer_Cost` for the portion of
+  farm-wide cumulative hours ≤ 720, `Temp_Worker_Cost` beyond it) rather than hard-coded to temp
+  rate, so it stays correct if the mix ever changes.
+
+- **Cross-over mechanism — result.** Re-checked that each crop's bed-by-bed marginal-profit table
+  in `Marginal Analysis` is now internally consistent with the chosen mix. Prior to this pass the
+  table priced every incremental bed's labor hours at the farm-wide blended rate ($19.73/hr),
+  which produced a tomato crossover between bed 9 (+$688.37) and bed 10 (−$453.46) — directly
+  contradicting the sheet's own cumulative-profit column (which peaked at bed 9, not bed 10) and
+  the "Solver-selected" label sitting on bed 10. Blended rate is correct for P&L cost
+  *allocation* (see Conventions) but is an average cost, not a marginal one. Re-priced per the
+  tiered marginal-rate formula above: tomato bed 10 marginal profit = +$551.89 (MC $8,248.11),
+  bed 11 marginal profit = −$590.17 (MC $9,390.17) — crossover now lands correctly at bed 10,
+  agreeing with both Solver's answer and the brute-force total-profit search. (The spec's
+  hand-check under Calculation logic gives $551.41 / $590.72 for the same two beds — the ~$0.50
+  difference is the hand-check rounding marginal hours to 2 decimals before multiplying; the
+  workbook carries full precision, so this ties out within rounding.) Carrots and mesclun use the
+  same tiered formula and were re-checked — both remain marginally profitable at their bed caps
+  (20 and 30); since the marginal rate is now temp throughout rather than the higher blended rate,
+  their marginal profit only rose, so their conclusion (limited by `Bed_Cap`, not diminishing
+  returns) is unchanged. Recalculated in LibreOffice after the fix: 868 formulas, 0 errors;
+  `Total_Farm_Profit` and the Solver-selected mix (10/20/30) are unaffected, since the P&L on the
+  Output sheet was never using the marginal-table formula to begin with.
