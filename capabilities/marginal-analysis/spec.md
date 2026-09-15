@@ -22,7 +22,7 @@ The purpose of this model is to determine the optimal ratio of planted crops for
 | 'Tomato_Dim_Return' | 0.10 | percent of compounding diminishing returns per bed | Case scenario, crop table |
 | 'Carrot_Bed_Cap' | 20 | number of beds | Case scenario, crop table |
 | 'Carrot_Price'| 2094 | USD per bed | Case scenario, crop table |
-| 'Carrrot_Hours'| 0.833 | hours per week per bed | Case scenario, crop table |
+| 'Carrrot_Hours'| =2.5/3 (0.8333…) | hours per week per bed | Case scenario, crop table shows rounded 0.833; exact value per review is 2.5/3 |
 | 'Carrot_Fertilizer' | 440 | USD per bed | Case scenario, crop table |
 | 'Carrot_Dim_Return' | 0.025 | percent of compounding diminishing returns per bed | Case scenario, crop table |
 | 'Mesclun_Bed_Cap' | 30 | number of beds | Case scenario, crop table |
@@ -34,9 +34,9 @@ The purpose of this model is to determine the optimal ratio of planted crops for
 | 'Fixed_Costs' | 20000 | USD per season | Case scenario, farm table |
 | 'Beds_Available' | 64 | Total beds available to plant this season | Case scenario, farm table |
 | 'Farmer_Hours' | 720 | hours available to work per season | Case scenario, farm table |
-| 'Farmer_Cost' | 34.72 | USD per hour worked | Case scenario, farm table |
+| 'Farmer_Cost' | =25000/720 (34.7222…) | USD per hour worked | Case: $50,000/season, half her time (720 hrs) → $25,000 of cost over 720 hrs. Brief table shows rounded 34.72 |
 | 'Temp_Worker_Count' | 4 | number of available temporary workers, cannot exceed this amount | Case scenario, farm table |
-| 'Temp_Worker_Cost' | 17.36 | USD per hour worked | Case scenario, farm table |
+| 'Temp_Worker_Cost' | =25000/1440 (17.3611…) | USD per hour worked | Case: $25,000 per temp worker over 1,440 hrs. Brief table shows rounded 17.36 |
 | 'Temp_Worker_Hours_Each' | 1440 | hours available to work for EACH temp worker | Case scenario, farm table |
 | 'Labor_Hours_for_q_beds_of_one_crop | Labor(q) = q x hours per week per bed x 36 x (1+dimishing return rate)^q | formula for case | Case scenerio |
 
@@ -160,13 +160,23 @@ you did about it.
   *allocation* (see Conventions) but is an average cost, not a marginal one. Re-priced per the
   tiered marginal-rate formula above: tomato bed 10 marginal profit = +$551.89 (MC $8,248.11),
   bed 11 marginal profit = −$590.17 (MC $9,390.17) — crossover now lands correctly at bed 10,
-  agreeing with both Solver's answer and the brute-force total-profit search. (The spec's
-  hand-check under Calculation logic gives $551.41 / $590.72 for the same two beds — the ~$0.50
-  difference is the hand-check rounding marginal hours to 2 decimals before multiplying; the
-  workbook carries full precision, so this ties out within rounding.) Carrots and mesclun use the
-  same tiered formula and were re-checked — both remain marginally profitable at their bed caps
-  (20 and 30); since the marginal rate is now temp throughout rather than the higher blended rate,
-  their marginal profit only rose, so their conclusion (limited by `Bed_Cap`, not diminishing
+  agreeing with both Solver's answer and the brute-force total-profit search. Carrots and mesclun
+  use the same tiered formula and were re-checked — both remain marginally profitable at their bed
+  caps (20 and 30); since the marginal rate is now temp throughout rather than the higher blended
+  rate, their marginal profit only rose, so their conclusion (limited by `Bed_Cap`, not diminishing
   returns) is unchanged. Recalculated in LibreOffice after the fix: 868 formulas, 0 errors;
   `Total_Farm_Profit` and the Solver-selected mix (10/20/30) are unaffected, since the P&L on the
   Output sheet was never using the marginal-table formula to begin with.
+
+- **Rounded inputs (Stage 1.2 review, PR #9).** Adam's review found that `Carrrot_Hours`,
+  `Farmer_Cost`, and `Temp_Worker_Cost` held the case brief's *displayed* rounded values (0.833,
+  34.72, 17.36) rather than their exact derivations, and that this — not hand-check rounding as
+  the previous audit entry above wrongly concluded — was the source of both the ~$0.48 gap between
+  the workbook's marginal-profit table and its own hand-check, and the $13.50 gap between
+  `Total_Farm_Profit` ($42,775.16) and the reviewer's independent model ($42,761.66). Corrected
+  the three named ranges to formulas carrying full precision: `Carrrot_Hours` = `=2.5/3`,
+  `Farmer_Cost` = `=25000/720`, `Temp_Worker_Cost` = `=25000/1440` (see Inputs table above for
+  derivations). Recalculated in LibreOffice: 0 errors, `Total_Farm_Profit` = $42,761.66 (was
+  $42,775.16), Solver-selected mix unchanged at 10/20/30 beds, and the tomato bed 10/11
+  marginal-profit table now ties to the spec's own hand-check exactly (+$551.41 / −$590.72,
+  MC $8,248.59 / $9,390.72) with no residual rounding gap.
