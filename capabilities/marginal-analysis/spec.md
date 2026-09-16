@@ -180,3 +180,12 @@ you did about it.
   $42,775.16), Solver-selected mix unchanged at 10/20/30 beds, and the tomato bed 10/11
   marginal-profit table now ties to the spec's own hand-check exactly (+$551.41 / −$590.72,
   MC $8,248.59 / $9,390.72) with no residual rounding gap.
+
+- **Blank workbook on open (regression from the rounded-inputs fix above).** The `.xlsx` committed
+  by that fix carried the corrected formulas but no cached formula results — every formula cell's
+  `<v>` was empty — so opening the file without a recalculation showed a visually blank workbook.
+  Recomputed all 871 formula cells (using a formula-evaluation engine, since this sandbox has no
+  working Excel/LibreOffice recalculation path) and wrote the cached values back into the same
+  cells without touching any formula, style, or structure. Verified the results tie out to the
+  figures already documented above: `Total_Farm_Profit` = $42,761.66, tomato bed 10/11 marginal
+  profit = +$551.41 / −$590.72, and all 8 Constraints-sheet rows read "OK".
