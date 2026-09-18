@@ -7,7 +7,7 @@ status: audited          # draft | built | audited
 built_with: "Claude Code, from this file"
 ---
 
-# <Capability> — model specification
+# Marginal Analysis — model specification
 
 ## Purpose
 The purpose of this model is to determine the optimal ratio of planted crops for a farm to plant for a single season. The model must answer the specific number of beds to plant for Tomatoes, Carrots and Mesclun.
@@ -41,12 +41,26 @@ The purpose of this model is to determine the optimal ratio of planted crops for
 | 'Labor_Hours_for_q_beds_of_one_crop | Labor(q) = q x hours per week per bed x 36 x (1+dimishing return rate)^q | formula for case | Case scenerio |
 
 ## Structure
- - Create an excel workbook
- - Create a crop table on the top of the sheet that lists all of the known values above. The table must be formatted in an easy-to-read way.
- - Every cell in the file outside of the known values must contain a formula and not a constant.
- - Create a separate sheet that lists all of the constraints known to this case from the information outlined in the inputs above.
- - Create a separate output area, defined by professional formatting, that will show the optimal crop mix and the mechanisms that drive the cross-over point for each particular crop
- - User will use solver plug-in to solve for the optimal crop mix, format the file to easily input into excel's solver add-in
+The workbook is one Excel file with four sheets:
+
+- **Inputs** — a crop table listing every named value from the contract above, formatted for
+  easy reading. This is the only sheet that may hold typed constants; every other cell in the
+  workbook must contain a formula, not a constant.
+- **Constraints** — one row per constraint implied by the inputs (each crop's bed cap, total
+  farm bed capacity, total farm labor-hour capacity, non-negative-integer checks on beds
+  planted), each computed live against the current mix and flagged OK/VIOLATION, plus a single
+  rollup cell for whether all constraints hold.
+- **Marginal Analysis** — a bed-by-bed marginal-cost and marginal-profit table for each crop,
+  showing the mechanism (tiered farmer/temp labor pricing, compounding diminishing returns) that
+  drives that crop's cross-over point, and marking the Solver-selected bed count.
+- **Output** — the decision variables (beds planted per crop, Solver's changeable cells), the
+  resulting P&L by crop and farm-level summary, the Solver setup guide (objective, changeable
+  cells, constraints, solving method), and the acceptance checks from the Validation rules
+  section below. The beds-planted cells are Solver's changeable cells and hold values, not
+  formulas; every other cell on this sheet is a formula.
+
+The workbook must be wired for Excel's Solver add-in: objective, changeable cells, and
+constraints all reference the named ranges above so a user can open Solver and run it directly.
 
 ## Calculation logic
 
@@ -62,11 +76,6 @@ Marginal profit for bed q = 'Price' − 'Fertilizer' − (Marginal_Labor_Hours(q
 where Marginal_Labor_Hours(q) = Labor(q) − Labor(q−1) and Marginal_Rate is 'Temp_Worker_Cost'
 once cumulative farm-wide hours have already passed 'Farmer_Hours', else 'Farmer_Cost'.
 
-Hand-check (tomatoes, at the optimal mix where farmer hours are already spent elsewhere):
-bed 10 → 424.43 marginal hrs × $17.36 + $880 fertilizer = $8,248.59 MC → +$551.41 marginal
-profit. Bed 11 → 490.22 marginal hrs × $17.36 + $880 = $9,390.72 MC → −$590.72 marginal profit.
-Cross-over falls at bed 10, matching Solver's selection.
-
 ## Conventions
  - Beds must be whole numbers; no partial beds planted
  - The farmer's hours 'Farmer_Hours' must be consumed first before hiring additional temp labor
@@ -78,9 +87,33 @@ Cross-over falls at bed 10, matching Solver's selection.
  - For marginal (cross-over) analysis, determining whether one more bed is worth planting,labor must be priced at the true marginal wage of the next hour, not the average: once cumulative farm-wide labor hours exceeds 'Farmer_Hours' (720), every additional hour is temp labor at 'Temp_Worker_Cost' ($17.36/hr), not the blended rate. Using the blended average as a marginal cost understates true marginal profit near a crop's cap and can misidentify the optimal bed count.
 
 ## Validation rules
- - Every calculated cell contains a formula
- - Total number of beds planted cannot exceed 64
- - Total labor hours cannot exceed the farmers' total plus the temp labor total (720+1440*4) or 6480 hours
+ - Every calculated cell contains a formula; no constant outside the Inputs sheet.
+ - Total number of beds planted cannot exceed 64 ('Beds_Available').
+ - Total labor hours cannot exceed the farmers' total plus the temp labor total (720+1440*4) or
+   6,480 hours.
+
+### Acceptance gates
+These are the published Stage 1.2 check figures. The workbook must expose a target-vs-computed
+row for each on the Output sheet (see Structure), each with a stated tolerance and a required
+action when the check fails.
+
+ - **Optimal mix.** Solver's selected mix must equal Tomatoes=10, Carrots=20, Mesclun=30 beds,
+   exact match (tolerance 0). On failure: re-check the marginal-rate and diminishing-returns
+   formulas before re-running Solver — a mix mismatch means the objective or a constraint is
+   wrong, not that Solver needs a nudge.
+ - **Total farm profit.** 'Total_Farm_Profit' must equal $42,761.66, tolerance ±$0.01. On
+   failure: an input is almost certainly holding a rounded display value instead of its exact
+   derivation — re-derive 'Carrrot_Hours', 'Farmer_Cost', and 'Temp_Worker_Cost' from the case
+   brief's underlying formulas (2.5/3, 25000/720, 25000/1440) rather than their displayed rounded
+   values, and recompute.
+ - **Tomato bed-10-to-11 cross-over.** Hand-check (tomatoes, at the optimal mix where farmer
+   hours are already spent elsewhere): bed 10 → 424.43 marginal hrs × $17.36 + $880 fertilizer =
+   $8,248.59 marginal cost → marginal profit must equal +$551.41. Bed 11 → 490.22 marginal hrs ×
+   $17.36 + $880 = $9,390.72 marginal cost → marginal profit must equal −$590.72. Tolerance
+   ±$0.01 on each. Cross-over must fall at bed 10, matching Solver's selection. On failure: the
+   marginal-analysis table is pricing labor at the blended P&L rate instead of the tiered
+   marginal rate — confirm 'Temp_Worker_Cost' applies to every hour once farm-wide cumulative
+   hours pass 'Farmer_Hours'.
 
 ## Outputs
  - Total number of beds per each of the crops for optimal profit
