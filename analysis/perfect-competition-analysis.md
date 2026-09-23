@@ -92,7 +92,7 @@ Figures 2 and 3 show why carrots and mesclun stop for a different reason than to
 Cells: `Output!A65:H67`
 
 - Carrots and mesclun lose money at **every** quantity when grown alone (`Marginal Analysis!M40:M59` and `M74:M103`, all negative).
-- **Correction to the page:** tomatoes are the exception. They're profitable at 7–13 beds (`M12:M18`) and peak at +$6,172.77 at 10. "Every single crop loses money alone" is true only for carrots and mesclun.
+- Tomatoes are the exception. They're profitable at 7–13 beds (`M12:M18`) and peak at +$6,172.77 at 10. "Every single crop loses money alone" is true only for carrots and mesclun.
 - In the plan, contribution before fixed cost is $62,761.66 in total. Subtract the $20,000 fixed cost and you get $42,761.66 (`Output!G14`, `B23`).
 - Shutdown rule: produce if P ≥ AVC, and fixed cost doesn't enter the decision. The $20k is paid either way this season. Dropping carrots would throw away $13,682 of contribution toward a cost the farm pays anyway.
 
