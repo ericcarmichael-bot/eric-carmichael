@@ -8,9 +8,6 @@
 
 **Exercised in:** Perfect competition — [brief](../../docs/briefs/perfect-competition-brief.md) · [model](model.xlsx) · [analysis](../../analysis/perfect-competition-analysis.md) · [memo](../../docs/decisions/perfect-competition-memo.md)
 
-| Engagement | Brief | Analysis | Memo |
-|---|---|---|---|
-| Perfect competition — farm crop mix | [`docs/briefs/perfect-competition-brief.md`](../../docs/briefs/perfect-competition-brief.md) | `analysis/` | `docs/decisions/` |
 
 ## Files here
 
