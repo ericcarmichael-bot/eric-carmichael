@@ -8,7 +8,7 @@ model: capabilities/marginal-analysis/model.xlsx
 
 # Stage 3: Perfect Competition
 
-All figures come from `capabilities/marginal-analysis/model.xlsx`. T
+All figures come from `capabilities/marginal-analysis/model.xlsx`.
 
 ## 0. Where each finding lives in the workbook
 
@@ -36,7 +36,12 @@ All figures come from `capabilities/marginal-analysis/model.xlsx`. T
 - Total farm profit when only tomatoes change (carrots and mesclun fixed at 20/30): 8 → $40,654.03 · 9 → $42,210.25 · **10 → $42,761.66** · 11 → $42,170.95 · 12 → $40,283.36. It peaks at 10, and the drop from 10 to 11 ($590.72) matches `G16` exactly.
 - Revenue per bed is flat at $8,800, so the price never falls. What rises is **hours per bed**: bed 10 needs 424 hrs and bed 11 needs 490. That's the 10% compounding in `Labor(q)`.
 - The tomato cap (20) is short by 10 (`Output!D52`). 
-- Figure: `analysis/figures/tomato-mc-vs-price.png`
+
+Figure 1 shows the crossing: the $8,800 price line sits above tomato marginal cost through bed 10 and below it at bed 11.
+
+![Tomato marginal cost vs. price](figures/tomato-mc-vs-price.png)
+
+*Figure 1. Tomato marginal cost vs. the $8,800 price. Blue = marginal cost in the 10/20/30 plan (`Marginal Analysis!J6:J25`); orange = tomatoes grown alone (`K6:K25`), which shows the bed 5 → 6 dip.*
 
 ## 2. What binds, and what relaxing it is worth
 
@@ -50,7 +55,16 @@ All figures come from `capabilities/marginal-analysis/model.xlsx`. T
 | Temp workers | 3.16 | 4 | 0.84 | No | $0 (a 5th worker is worth nothing) | `Output!B61:E61` |
 
 - If the carrot cap were lifted completely, Solver plants 24 carrots (10/24/30 = 64 beds) for $43,837.51 (+$1,075.85), and then **total land becomes binding**. Lifting the mesclun cap instead gives 10/20/34 = $43,541.00 (+$779.34). Carrot ground comes first.
-- Figures: `analysis/figures/carrot-mc-vs-price.png`, `analysis/figures/mesclun-mc-vs-price.png`
+
+Figures 2 and 3 show why carrots and mesclun stop for a different reason than tomatoes: at their caps, marginal cost is still below price. The hollow point is the first bed past the cap, and the gap between it and the price line is the shadow price.
+
+![Carrot marginal cost vs. price](figures/carrot-mc-vs-price.png)
+
+*Figure 2. Carrot marginal cost vs. the $2,094 price (`Marginal Analysis!J40:J59`); bed 21 from `Output!F53`.*
+
+![Mesclun marginal cost vs. price](figures/mesclun-mc-vs-price.png)
+
+*Figure 3. Mesclun marginal cost vs. the $2,700 price (`Marginal Analysis!J74:J103`); bed 31 from `Output!F54`.*
 
 ## 3. The tomato MC dip (tomatoes grown alone)
 
@@ -65,7 +79,7 @@ All figures come from `capabilities/marginal-analysis/model.xlsx`. T
 - The farmer's 720 hrs (`Farmer_Hours`, `Inputs!B15`) run out during bed 5 (cum 724.73). The price of the next hour halves: $34.72 → $17.36 (`Inputs!B16`, `B18`; exactly 25,000/720 vs 25,000/1,440).
 - At bed 6, 17% more hours at 50% of the wage makes MC fall by $2,754.58. From bed 7 on, the 10% compounding wins again.
 - The same dip shows up in each crop's standalone schedule: tomatoes at bed 6, carrots at bed 17 ($2,552.10 → $1,670.90, `K55:K56`), mesclun at beds 14–15 ($2,988.40 → $2,522.58 → $1,983.96, `K86:K88`).
-- **Why it doesn't show in the 10/20/30 plan:** with all three crops planted, farm-wide hours pass 720 before the tomato table starts, so every tomato hour is a temp hour (`J` column; blue line in the tomato figure). The dip is about *which* hours are marginal. In the plan, the farmer's hours are infra-marginal.
+- **Why it doesn't show in the 10/20/30 plan:** with all three crops planted, farm-wide hours pass 720 before the tomato table starts, so every tomato hour is a temp hour (`J` column; blue line in Figure 1). The dip is about *which* hours are marginal. In the plan, the farmer's hours are infra-marginal.
 
 ## 4. Why grow crops that "lose money"
 
