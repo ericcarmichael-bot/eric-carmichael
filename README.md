@@ -5,4 +5,4 @@ I am a finance and business development professional based in Hawaiʻi, with exp
 
 | Engagement | Capability | Brief | Analysis | Memo |
 |---|---|---|---|---|
-| Perfect competition — farm crop mix | [`marginal-analysis`](capabilities/marginal-analysis/) | [`docs/briefs/perfect-competition-brief.md`](docs/briefs/perfect-competition-brief.md) | `analysis/` | `docs/decisions/` |
+| Perfect competition — farm crop mix | [`marginal-analysis`](capabilities/marginal-analysis/) | [`docs/briefs/perfect-competition-brief.md`](docs/briefs/perfect-competition-brief.md) | [`analysis/perfect-competition-analysis.md`](analysis/perfect-competition-analysis.md) | [`docs/decisions/perfect-competition-memo.md`](docs/decisions/perfect-competition-memo.md) |
