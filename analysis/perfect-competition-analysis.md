@@ -92,7 +92,7 @@ Figures 2 and 3 show why carrots and mesclun stop for a different reason than to
 Cells: `Output!A65:H67`
 
 - Carrots and mesclun lose money at **every** quantity when grown alone (`Marginal Analysis!M40:M59` and `M74:M103`, all negative).
-- **Correction to the page:** tomatoes alone are *not* a loss everywhere. They're profitable at 7–13 beds (`M12:M18`) and peak at +$6,172.77 at 10. "Every single crop loses money alone" is true only for carrots and mesclun.
+- **Correction to the page:** tomatoes are the exception. They're profitable at 7–13 beds (`M12:M18`) and peak at +$6,172.77 at 10. "Every single crop loses money alone" is true only for carrots and mesclun.
 - In the plan, contribution before fixed cost is $62,761.66 in total. Subtract the $20,000 fixed cost and you get $42,761.66 (`Output!G14`, `B23`).
 - Shutdown rule: produce if P ≥ AVC, and fixed cost doesn't enter the decision. The $20k is paid either way this season. Dropping carrots would throw away $13,682 of contribution toward a cost the farm pays anyway.
 
@@ -105,7 +105,7 @@ Cells: `Output!A65:H67`
 | Mesclun | 30 | 30 | <30 = something constraining | Right |
 | Total beds | 58 | 60 | ">58 = proven incorrect" | **Wrong by my rule** |
 
-In Stage 1 I predicted 8 tomato beds, 20 carrot and 30 mesclun, 58 beds in total. The model says 10/20/30. On carrots and mesclun I was right, but for a partly wrong reason: I said they were efficient, when what actually stops them is the bed cap while price is still above marginal cost. On tomatoes I landed inside my own 6–10 "directionally right" band, but my reasoning was wrong. I assumed the 10% diminishing return cut revenue, so the 8th bed would earn only 47.8% of the first. In the model, and in my own spec, every tomato bed sells for $8,800 and the 10% compounds on labor hours. That's why bed 10 still earns +$551 and bed 11 is the first to lose money (−$591). My two tests also contradicted each other: 10 tomato beds passes the 6–10 band but fails my "more than 58 beds means I'm wrong" rule, and by that rule I was wrong. Stopping at 8 tomato beds would have left $2,107.63 on the table ($40,654.03 vs $42,761.66). I also missed the marginal-cost dip when the farmer's 720 hours run out, and that the farm ends up with 4 beds and most of a temp worker unused.
+In Stage 1 I predicted that the farm would need 8 tomato beds, 20 carrot and 30 mesclun, 58 beds in total. The model outputted 10/20/30. On carrots and mesclun I was correct, but for a partly wrong reason: I said they were efficient, when what actually stops them is the bed cap while price is still above marginal cost. On tomatoes, I landed inside the 6–10 "directionally right" band, but my reasoning was wrong. I assumed the 10% diminishing return cut revenue, so the 8th bed would earn only 47.8% of the first. In the model, and in my own spec, every tomato bed sells for $8,800 and the 10% compounds on labor hours. That's why bed 10 still earns +$551 and bed 11 is the first to lose money (−$591). My two tests also contradicted each other: 10 tomato beds passes the 6–10 band but fails my "more than 58 beds means I'm wrong" rule, and by that rule I was wrong. Stopping at 8 tomato beds would have left $2,107.63 on the table ($40,654.03 vs $42,761.66). I also missed the marginal-cost dip when the farmer's 720 hours run out, and that the farm ends up with 4 beds and most of a temp worker unused.
 
 ## 6. What would change my answer?
 
