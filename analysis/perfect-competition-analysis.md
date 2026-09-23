@@ -105,12 +105,7 @@ Cells: `Output!A65:H67`
 | Mesclun | 30 | 30 | <30 = something constraining | Right |
 | Total beds | 58 | 60 | ">58 = proven incorrect" | **Wrong by my rule** |
 
-Points to be precise about:
-1. **The mechanism was wrong even though the number was close.** The brief says "the 8th tomato bed will generate 0.9^7 = 47.8% of the return that the first bed did." In the model (and in my own spec's Conventions: "Diminishing returns compound on the labor hours and not on the price"), every bed earns $8,800. The 10% compounds on **hours**, which is why bed 10 still earns +$551. If revenue had really decayed 10% per bed, bed 8 would earn $4,208 against $6,361 of MC, and the answer would be about 6 beds.
-2. **The two falsification tests contradict each other.** A 10-bed tomato result passes the 6–10 band but fails the 58-bed total.
-3. **Cost of the miss:** 8 tomatoes instead of 10 = $40,654.03 vs $42,761.66, which leaves **$2,107.63** on the table (4.9%).
-4. **Carrots and mesclun: right answer, partly right reason.** I said "efficient use of resources." The model says P > MC at the cap, so the cap stops them, not the economics. I didn't mention the caps binding or their shadow value.
-5. **Not anticipated at all:** the MC dip, and that land (4 beds) and labor (0.84 workers) are both slack.
+In Stage 1 I predicted 8 tomato beds, 20 carrot and 30 mesclun, 58 beds in total. The model says 10/20/30. On carrots and mesclun I was right, but for a partly wrong reason: I said they were efficient, when what actually stops them is the bed cap while price is still above marginal cost. On tomatoes I landed inside my own 6–10 "directionally right" band, but my reasoning was wrong. I assumed the 10% diminishing return cut revenue, so the 8th bed would earn only 47.8% of the first. In the model, and in my own spec, every tomato bed sells for $8,800 and the 10% compounds on labor hours. That's why bed 10 still earns +$551 and bed 11 is the first to lose money (−$591). My two tests also contradicted each other: 10 tomato beds passes the 6–10 band but fails my "more than 58 beds means I'm wrong" rule, and by that rule I was wrong. Stopping at 8 tomato beds would have left $2,107.63 on the table ($40,654.03 vs $42,761.66). I also missed the marginal-cost dip when the farmer's 720 hours run out, and that the farm ends up with 4 beds and most of a temp worker unused.
 
 ## 6. What would change my answer?
 
