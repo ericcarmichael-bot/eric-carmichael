@@ -36,3 +36,12 @@ AI assisted me in turning the case requirements into the model deliverable. AI a
 | 2026-09-23 | Claude Code | Make MC-vs-price charts for each crop. | Three PNGs in `analysis/figures/`, drawn with Python from the workbook's formulas (not exported from Excel). | Had Claude embed these into the analysis|
 | 2026-09-23 | Claude Code | Check my repo against the Stage 3 checklist; fix the figures so they render. | A checklist gap review; embedded Figures 1–3 with captions in the analysis. |Made the corrections per the suggestions |
 | 2026-09-23 | Claude code | Help me draft the initial analysis and memo docs that I will then rewrite in my own words | Drafts of the deliverables | Used it to prepare the analysis |
+
+## Individual research paper — Jones Act sessions
+
+| Date | Tool | What I asked | What I got | What I did with it |
+|---|---|---|---|---|
+| 2026-09-29 | ChatGPT | Help research the Jones Act / Hawaiʻi freight question, assuming the existing decision memo remained the working direction. | Source leads and counterarguments covering Matson tariffs, Matson's 10-K, GAO, Pasha tariffs, and competition evidence from APL v. Matson. | Kept the research leads; verified the material sources before using them. |
+| 2026-09-29 | ChatGPT | Keep digging for evidence more directly tied to whether additional carrier competition changes prices. | Found Hawaiʻi-specific loyalty-discount evidence tied to Pasha competition, Guam entry/market-share evidence, a Home Depot price-versus-transit-time comparison, and a Puerto Rico GAO comparator. | Shifted the research emphasis away from tariff comparisons and toward competition/entry evidence. |
+| 2026-09-29 | ChatGPT | Review current Pasha tariff information I supplied and decide whether more tariff hunting was necessary. | Identified a current $11,017 40-foot Cargo NOS westbound Pasha tariff but flagged that it is not commodity-comparable with Matson's household-goods tariff. | Did not use it as a direct Matson-versus-Pasha price comparison; stopped further tariff archaeology unless it becomes necessary. |
+| 2026-09-29 | ChatGPT | Finalize the GitHub setup for the research paper. | Checked the course research-paper instructions and the existing repo structure. ChatGPT had earlier drafted paper-like prose before the course AI boundary was re-checked. | Did not commit the AI-written paper prose or AI-built analysis model. Kept only compliant research support, repo scaffolding, and this log entry; the brief, spec, drafts, analysis, recommendation, paper prose, and reflection remain mine. |
