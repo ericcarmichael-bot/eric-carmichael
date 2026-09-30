@@ -6,3 +6,4 @@ I am a finance and business development professional based in Hawaiʻi, with exp
 | Engagement | Capability | Brief | Analysis | Memo |
 |---|---|---|---|---|
 | Perfect competition — farm crop mix | [`marginal-analysis`](capabilities/marginal-analysis/) | [`docs/briefs/perfect-competition-brief.md`](docs/briefs/perfect-competition-brief.md) | [`analysis/perfect-competition-analysis.md`](analysis/perfect-competition-analysis.md) | [`docs/decisions/perfect-competition-memo.md`](docs/decisions/perfect-competition-memo.md) |
+| Individual research paper — Jones Act and Hawaiʻi freight | [`economic-research`](capabilities/economic-research/) | [`docs/briefs/research-brief.md`](docs/briefs/research-brief.md) | In progress | [`docs/decisions/jones_act_decision_memo.md`](docs/decisions/jones_act_decision_memo.md) |

@@ -26,3 +26,6 @@ venv/
 *.key
 *.pem
 credentials.json
+
+## Research paper scratch work
+scratch/
