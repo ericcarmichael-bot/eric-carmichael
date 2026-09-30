@@ -10,7 +10,7 @@ The economic question at play here is whether or not these restrictions material
 
 ## Research Question
 
-Does available evidence support the hypothesis that eliminating the Jones Act, specifically the prohibition on foreign-flagged carriers from transporting domestic cargo between Honolulu and the U.S West Coast, would reduce ocean container rates by increasing competition and breaking apart the existing oligopoly shared by Pasha and Matson?
+Does available evidence support the hypothesis that permitting foreign-flagged carriers to transport domestic containerized cargo between Honolulu and U.S. West Coast ports would reduce ocean freight rates by increasing effective competition beyond Matson and Pasha?
 
 ## Initial Hypothesis
 
