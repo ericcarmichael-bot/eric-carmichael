@@ -26,6 +26,25 @@ The research question is:
 
 For purposes of the analysis, the counterfactual will focus specifically on allowing foreign-flagged carriers to transport domestic containerized cargo between Hawaiʻi and the U.S. West Coast rather than modeling the effect of a full Jones Act repeal.
 
+### Counterfactual definition
+
+**Primary counterfactual — incidental cabotage on existing international services.**
+A foreign-flagged container vessel that is already on a scheduled international voyage calling Honolulu may also load and discharge domestic containers moving between Honolulu and U.S. West Coast ports on that same voyage. This follows the New Zealand model (Maritime Transport Act 1994, s. 198), which lets foreign ships carry coastal cargo only while on a continuous journey between foreign ports and while loading or unloading international cargo.
+
+Why this counterfactual rather than a general opening of the route:
+
+- It is the version where entry is most plausible. It needs no new dedicated Hawaiʻi service, only domestic cargo added to loops that already call Honolulu (Step 1).
+- It pins down the economic mechanism. The value comes from filling spare capacity on legs a carrier is already sailing, so the analysis can test a specific prediction instead of a general "more competition" claim.
+- It makes a directional prediction. Transpacific westbound legs (U.S. → Asia) sail with large amounts of empty capacity. That is the same direction as Hawaiʻi's high-priced leg (West Coast → Honolulu). If the mechanism is real, pressure on rates should be concentrated on the **westbound** leg. Little effect is expected eastbound (Honolulu → West Coast), where the transpacific headhaul is already full.
+- It has an observable precedent (New Zealand since 1994) and a reverse precedent (Australia's 2012 re-regulation of coastal trading).
+
+**Held constant:** Matson and Pasha fleets and schedules; Honolulu terminal capacity; Hawaiʻi cargo demand; U.S. customs, safety, and port-state rules. Foreign vessels are assumed to remain foreign-crewed and foreign-built.
+
+**Secondary (bounding) counterfactual — full foreign-flag access to the noncontiguous trade.**
+Any foreign-flag vessel may carry Honolulu–West Coast cargo, including on new dedicated services, as proposed in the Noncontiguous Shipping Relief Act (H.R. 667, Rep. Case). The analysis uses this only to frame the upper bound qualitatively. It does not model it.
+
+**Not the counterfactual:** full Jones Act repeal, changes to U.S.-build or crewing rules for U.S.-flag carriers, or Jones Act waivers after disasters.
+
 The analysis must answer four main questions:
 
 1. Would removing the Jones Act restriction on foreign-flagged carriers materially expand the number of carriers capable of competing for Hawaiʻi domestic cargo?
@@ -59,6 +78,12 @@ The model is intended to test the proposed economic mechanism. It is not require
 | `Guam_APL_Transit_Difference` | approximately 7 days slower in documented Home Depot comparison | days | APL v. Matson factual record |
 | `GAO_Counterevidence` | Domestic carriers and industry participants reported relatively stable rates / adequate number of carriers in some noncontiguous markets | qualitative | GAO-22-105391 |
 | `Directional_Cargo_Data` | TBD if reliable data can be located | TEU / containers | Port, government, or carrier data |
+| `Foreign_Loops_Calling_HNL` | Rotation of each foreign service calling Honolulu (e.g., ONE AHX, CMA CGM EXX), including whether it calls a U.S. West Coast port and in which direction relative to Honolulu | Port sequence | Carrier schedules |
+| `Transpacific_WB_Utilization` | Share of westbound (U.S. → Asia) transpacific capacity sailing empty or unused | percent | Industry data (e.g., Drewry, Lloyd's List, carrier disclosures) |
+| `NZ_Cabotage_Rule` | Foreign ships may carry NZ coastal cargo only on a continuous foreign-to-foreign journey while also handling international cargo | Legal rule | Maritime Transport Act 1994 (NZ), s. 198 |
+| `NZ_Cabotage_Outcome` | Observed rate, capacity, or service changes after the 1994 opening | TBD | NZ Ministry of Transport / academic studies |
+| `AU_2012_Reregulation_Outcome` | Observed rate and fleet changes after Australia restricted foreign coastal carriage in 2012 | TBD | Australian Government Regulation Impact Statement (2017) |
+| `Full_Access_Benchmark` | Legislative proposal for full foreign-flag access to the noncontiguous trades | Legal proposal | Noncontiguous Shipping Relief Act (H.R. 667) |
 
 Any additional input added to the analysis must include a source and must identify whether it is a primary source, government analysis, court record, carrier statement, or secondary source.
 
@@ -164,6 +189,17 @@ The analysis should distinguish between:
 - a carrier being legally eligible; and
 - a carrier actually having an economic reason to enter.
 
+Under the primary counterfactual, also test **rotation fit**: for each foreign loop calling Honolulu, record whether it also calls a U.S. West Coast port and whether the West Coast → Honolulu leg falls on the carrier's under-used transpacific backhaul. A loop that never touches the West Coast (e.g., an Asia–Honolulu–Asia loop) counts as legally eligible but needs a rotation change to participate.
+
+### Directional prediction
+
+The primary counterfactual predicts an asymmetric effect:
+
+- **Westbound (West Coast → Honolulu):** the larger expected rate pressure, because foreign carriers have spare capacity on this leg.
+- **Eastbound (Honolulu → West Coast):** little expected effect, because the transpacific headhaul is already near capacity.
+
+The analysis should report whether the evidence (transpacific utilization by direction, foreign-loop rotations, comparator outcomes) is consistent with this asymmetry. If foreign carriers' spare capacity turns out to be concentrated eastbound, or rotations make a Honolulu call on the backhaul impractical, the primary counterfactual is weakened.
+
 ### Step 2 — Entry to increased competition
 
 Determine whether additional carrier entry has previously changed market behavior.
@@ -197,6 +233,9 @@ The analysis should not assume that all cost savings pass through to customers.
 
 - "Westbound" means U.S. West Coast → Hawaiʻi.
 - "Eastbound" means Hawaiʻi → U.S. West Coast.
+- "Transpacific westbound" means U.S. → Asia, and "transpacific eastbound" means Asia → U.S. Always label which trade a direction refers to, because Hawaiʻi's westbound leg lines up with the transpacific westbound leg.
+- "Incidental cabotage" means domestic cargo carried by a foreign-flag vessel on a voyage that is already international, as defined in the primary counterfactual.
+- New Zealand and Australia are comparators for the policy design, not controlled experiments for Hawaiʻi. Their coastal trades differ in distance, volume, and cargo mix.
 - The primary market examined is containerized ocean freight between Honolulu and the U.S. West Coast.
 - Published tariffs are observable standardized prices but are not assumed to equal average realized customer prices.
 - Negotiated contracts, loyalty discounts, and other commercial arrangements may cause realized prices to differ from published tariffs.
@@ -288,6 +327,14 @@ At least one serious finding that could weaken the hypothesis must survive into 
 
 The analysis fails this gate if all evidence is selected only because it supports the initial hypothesis.
 
+**Gate 7 — Counterfactual fit**
+
+The research must identify at least one foreign service that calls both Honolulu and a U.S. West Coast port, or show that such a call is a small change to an existing rotation, and must report transpacific directional utilization.
+
+Failure condition:
+
+If no existing foreign rotation can carry West Coast → Honolulu cargo without a new dedicated service, the primary counterfactual collapses into the secondary one. The paper must then say that entry would require new investment, not just filling spare capacity.
+
 ## Planned figures
 
 ### Figure 1 — Directional Hawaiʻi Container Rates
@@ -345,7 +392,11 @@ Expected evidence categories:
 - Guam market-share changes;
 - Guam customer price/service comparison;
 - Matson SEC disclosure regarding lower-cost foreign competition;
-- GAO counterevidence.
+- GAO counterevidence;
+- foreign-loop rotation fit (Honolulu + West Coast calls);
+- transpacific westbound spare capacity;
+- New Zealand 1994 cabotage opening (comparator);
+- Australia 2012 re-regulation (reverse comparator).
 
 The evidence matrix is intended to help determine which evidence actually belongs in the four-page paper.
 
