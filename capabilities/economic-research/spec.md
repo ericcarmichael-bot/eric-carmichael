@@ -365,6 +365,8 @@ The analytical model should not produce the final conclusion or recommendation a
 
 The final paper should use only the subset of findings necessary to answer the research question within the four-page limit.
 
+One figure to include: Westbound, foreign carriers add limited capacity at the low marginal cost of an otherwise-empty slot, shifting supply right (P₀ to P₁). Eastbound, no foreign service sails Honolulu to the West Coast and the leg already has spare capacity, so price is unchanged. With a duopoly, entry would also narrow incumbents' markup over cost.
+
 ## Out of scope
 
 Unless the research question is later expanded, the model will not attempt to calculate:
